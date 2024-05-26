@@ -1,4 +1,5 @@
 **Planificador de viajes**
+
 Empresa de turismo desea lanzar una aplicación que permita a sus usuarios planificar su viaje por distintos destinos de América Latina.
 Para ello, cuenta con una lista de destinos que puede ofrecer a sus usuarios. Siempre el origen es Buenos Aires, Argentina y el usuario podrá decidir paso a paso que otros destinos desea visitar.
 Desarrollar un programa que permita al usuario seleccionar los destinos de su viaje.
