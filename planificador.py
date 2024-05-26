@@ -51,7 +51,7 @@ def tramo_economico(destinos, distancias):
     return f"El tramo más economico: {destinos[min_tramo]}, Máximo: {destinos[max_tramo]}, Costo: {min_costo}" 
 
 # destinos ordenados por su valor 
-def ordenados_valor(destinos, distancias):
+def costos_ordenados(destinos, distancias):
     destinos_costos = []
     for i in range(len(destinos)):
         costo = distancias[i] * costoXkm
