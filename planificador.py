@@ -68,7 +68,7 @@ def costos_ordenados(destinos, distancias):
 # representa el costo que se asocia con cada destino 
 
 def mostrar_ordenados(destinos, distancias):
-   destinos_ordenados = ordenados_valor(destinos, distancias)
+   destinos_ordenados = costos_ordenados(destinos, distancias)
    print("Destinos ordenados de menor a mayor: ")
    for ordenado in destinos_ordenados:
        print(f"Nombre: {ordenado[0]}, kilometraje: {ordenado[1]}, Costo: {ordenado[2]}")
