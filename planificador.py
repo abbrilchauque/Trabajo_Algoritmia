@@ -89,5 +89,6 @@ def seleccion_destinos(destinos):
 
     
 
-    
+# funcion de busqueda secuencial 
+
 
