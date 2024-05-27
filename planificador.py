@@ -11,7 +11,8 @@ def menu_destinos():
         destinos.append([nombre, kilometraje])
     return destinos
 
-# se muestra la lista de destinos diponibles 
+# se muestra la lista de destinos diponibles
+# los destinos van incrementando  
 def destinos_disponibles(destinos):
     print("Destinos disponibles origen Buenos Aires: ")
     for i in range(len(destinos)): 
@@ -19,8 +20,8 @@ def destinos_disponibles(destinos):
         kilometraje = destinos[i][1]
         print(f"{i + 1}, Nombre: {nombre}, kilometraje: {kilometraje}km") 
 
-# destinos seleccionados 
-def detinos_seleccionados(destinos, distancias):
+# mostrar destinos seleccionados 
+def mostrar_destinos(destinos, distancias):
     print("Destinos que usted ha visitado: ")
     for i in range(len(destinos)):
         print(f"Nombre: {i + 1}, kilometraje: {distancias[i]}km ")
@@ -40,15 +41,17 @@ def km_totales(distancias):
     return f"Su recorrido tuvo un total de {total}km"
 
 # cual es el tramo más económico
+# max tramo indica el primer destino 
+# itera desde el segundo elemento hasta el ult 
 def tramo_economico(destinos, distancias):
     min_tramo = distancias[0] * costoXkm 
-    max_tramo = 0 
+    min_in = 0 
     for i in range(1, len(distancias)): 
         costoTramo = distancias[i] * costoXkm
         if costoTramo < min_tramo:
             min_costo = costoTramo
-            max_tramo = i 
-    return f"El tramo más economico: {destinos[min_tramo]}, Máximo: {destinos[max_tramo]}, Costo: {min_costo}" 
+            min_in = i 
+    return f"Destino más más economico: ${destinos[min_in]}, Distancia que le corresponde: {distancias[min_in]}, Costo: ${min_costo}" 
 
 # destinos ordenados por su valor 
 def costos_ordenados(destinos, distancias):
@@ -67,15 +70,23 @@ def costos_ordenados(destinos, distancias):
 # [2] 3er elemento de cada sublista en destinos_costos, el tercer elemento
 # representa el costo que se asocia con cada destino 
 
+# los indices en el print representan la tupla y los elementos que contiene (son 3)
 def mostrar_ordenados(destinos, distancias):
    destinos_ordenados = costos_ordenados(destinos, distancias)
    print("Destinos ordenados de menor a mayor: ")
    for ordenado in destinos_ordenados:
        print(f"Nombre: {ordenado[0]}, kilometraje: {ordenado[1]}, Costo: {ordenado[2]}")
 
+#seleccionar destinos 
+def seleccion_destinos(destinos):
+    select_destinos = []
+    select_distancias = []
+    while destinos != 0:
+        mostrar_destinos(destinos) 
+        select = int(input("Ingrese el ID de su destino (0 para terminar): "))
 
-# def programa(): 
-#     destinos = menu_destinos()
+       # if select:
+
     
 
     
