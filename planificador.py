@@ -41,9 +41,11 @@ def seleccion_destinos(destinos):
         select = int(input("Ingrese el ID de su destino (0 para terminar): "))
        
         if select.isdigit():
-            seleccion_num= int(select)
-            if 1 <= select <= len(destinos):
-                seleccion_i = select -1 
+            seleccion_num = int(select)
+            if seleccion_num == 0:
+                break
+            elif 1 <= seleccion_num <= len(destinos):
+                seleccion_i = seleccion_num - 1
                 select_destino = destinos[seleccion_i]
                 select_destinos.append(select_destino[0])
                 select_distancias.append(select_destino[1])
