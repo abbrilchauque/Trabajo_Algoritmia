@@ -32,12 +32,18 @@ def seleccion_destinos(destinos):
 
         if select.isdigit():
             seleccion_num = int(select)
+            # el 1 es el primer número que el usuario puede seleccionar 
+            # len destinos, el ultimo número 
             if 1 <= seleccion_num <= len(destinos):
+                # numero sea al menos 1, que sea menor a la cantidad de destinos
+                #con esto, nos aseguramos que no se seleccione un num fuera de rango
+                # se convierte al numero ingresado, en un i válido
                 seleccion_i = seleccion_num - 1
                 select_destino = destinos[seleccion_i]
                 select_destinos.append(select_destino[0])
                 select_distancias.append(select_destino[1])
                 
+                print("___________________________________")
                 print(f"Usted ha seleccionado la Ciudad: {select_destino[0]}, Kilometraje: {select_destino[1]}KM")
                 if select_destino[0] == "Buenos Aires":
                     print("destino: BUENOS AIRES. Viaje finalizado")
@@ -49,7 +55,7 @@ def seleccion_destinos(destinos):
             # hasta el final de la lista (los q van despues del seleccionado se mantienen)
                 destinos = destinos[:seleccion_i] + destinos[seleccion_i + 1:]
             else:
-                print("Número ingresado incorrecto. Vuelva a ingresar.")
+                print("Número ingresado incorrecto.")
         else:
             print("Por favor elija un número entero.")
 
@@ -86,6 +92,7 @@ def mostrar_ordenados(destinos_ordenados):
 destinos = menu_destinos()
 select_destinos, select_distancias = seleccion_destinos(destinos)
 
+print("___________________________________")
 print("Resumen de su viaje: ")
 mostrar_destinos(select_destinos, select_distancias)
 print(costo_total(select_distancias))
