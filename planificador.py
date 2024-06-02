@@ -76,8 +76,17 @@ def tramo_economico(destinos, distancias):
 
 # destinos ordenados por su valor 
 def destinos_ordenados(destinos, distancias):
-    destinos_costos = [[destinos[i], distancias[i], distancias[i] * costoXkm] for i in range(len(destinos))]
-    destinos_costos.sort(key=lambda x: x[2])
+    destinos_costos = []
+    for i in range(len(destinos)):
+        costo = distancias[i] * costoXkm
+        destinos_costos.append([destinos[i], distancias[i], costo])
+
+    for x in range(len(destinos_costos)):
+        for j in range(0, len(destinos_costos) - x -1): 
+            if destinos_costos[j][2] < destinos_costos [j + 1][2]:
+                aux = destinos_costos[j]
+                destinos_costos[j] = destinos_costos [j + 1]
+                destinos_costos[j + 1] = aux 
     return destinos_costos
 # [2] 3er elemento de cada sublista en destinos_costos, el tercer elemento
 # representa el costo que se asocia con cada destino 
