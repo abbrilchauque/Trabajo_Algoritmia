@@ -6,7 +6,7 @@ costoXkm = 500
 def menu_destinos():
     nombres_ciudades= ["Santiago", "Lima", "Sao Paulo", "Bogota", "Asunción"]
     destinos = []
-    for nombre in range(len(nombres_ciudades)):
+    for nombre in nombres_ciudades:
         kilometraje = random.randint(1000, 10000)
         destinos.append([nombre, kilometraje])
     return destinos
@@ -18,13 +18,54 @@ def destinos_disponibles(destinos):
     for i in range(len(destinos)): 
         nombre = destinos[i][0]
         kilometraje = destinos[i][1]
-        print(f"{i + 1}, Nombre: {nombre}, kilometraje: {kilometraje}km") 
+        print(f"{i + 1}, Ciudad: {nombre}, kilometraje: {kilometraje}km") 
 
 # mostrar destinos seleccionados 
 def mostrar_destinos(destinos, distancias):
     print("Destinos que usted ha visitado: ")
     for i in range(len(destinos)):
-        print(f"Nombre: {i + 1}, kilometraje: {distancias[i]}km ")
+        print(f"Ciudad: {i + 1}, kilometraje: {distancias[i]}km ")
+
+#seleccionar destinos 
+def seleccion_destinos(destinos):
+    select_destinos = []
+    select_distancias = []
+
+    seleccion_num = 0
+    while seleccion_num != 0 and len(destinos) > 0 :
+        print("Destinos desde buenos aires: ")   
+        for i in range(len(destinos)):
+            nombre, kilometraje = destinos[i]
+            print(f"{i + 1} - Ciudad: {nombre}, Kilometraje: {kilometraje}KM")  
+        
+        select = int(input("Ingrese el ID de su destino (0 para terminar): "))
+       
+        if select.isdigit():
+            seleccion_num= int(select)
+            if 1 <= select <= len(destinos):
+                seleccion_i = select -1 
+                select_destino = destinos[seleccion_i]
+                select_destinos.append(select_destino[0])
+                select_distancias.append(select_destino[1])
+
+                print(f"Usted ha seleccionado la Ciudad: {select_destino[0]}, Kilometraje: {select_destino[1]}KM")
+
+                if select_destino[0] == "Buenos Aires": 
+                    print("Usted ha seleccionado BUENOS AIRES. Viaje finalizado.")
+                    break
+
+            # esto obtiene una lista donde están todos los destinos
+            # menos los que ya hayan sido seleccionados 
+            # :seleccion_i desde el principio hasta el indice antes del destino q se seleccione
+            # seleccion_i + 1: todos los destinos en la lista desde el indice que le sigue
+            # hasta el final de la lista (los q van despues del seleccionado se mantienen)
+                destinos = destinos[:seleccion_i] + destinos[seleccion_i + 1:]
+            else: 
+                print("El número que usted ha ingresado es incorrecto. Por favor, vuelva a ingresar.")
+        else: 
+            print("Por favor ingrese un entero :(. Vuelva a intentarlo")
+
+    return select_destinos, select_distancias
 
 # costo total del kilometraje
 def costo_total(distancias):
@@ -54,7 +95,7 @@ def tramo_economico(destinos, distancias):
     return f"Destino más más economico: ${destinos[min_in]}, Distancia que le corresponde: {distancias[min_in]}, Costo: ${min_costo}" 
 
 # destinos ordenados por su valor 
-def costos_ordenados(destinos, distancias):
+def destinos_ordenados(destinos, distancias):
     destinos_costos = []
     for i in range(len(destinos)):
         costo = distancias[i] * costoXkm
@@ -71,24 +112,22 @@ def costos_ordenados(destinos, distancias):
 # representa el costo que se asocia con cada destino 
 
 # los indices en el print representan la tupla y los elementos que contiene (son 3)
-def mostrar_ordenados(destinos, distancias):
-   destinos_ordenados = costos_ordenados(destinos, distancias)
+def mostrar_ordenados(destinos_ordenados):
    print("Destinos ordenados de menor a mayor: ")
    for ordenado in destinos_ordenados:
        print(f"Nombre: {ordenado[0]}, kilometraje: {ordenado[1]}, Costo: {ordenado[2]}")
 
-#seleccionar destinos 
-def seleccion_destinos(destinos):
-    select_destinos = []
-    select_distancias = []
-    while destinos != 0:
-        mostrar_destinos(destinos) 
-        select = int(input("Ingrese el ID de su destino (0 para terminar): "))
+# PROGRAMA PRINCIPAL
+def main():
+    destinos = menu_destinos()
+    select_destinos, select_distancias = seleccion_destinos(destinos)
 
-       # if select:
+    print("Resumen de su viaje: ")
+    mostrar_destinos(select_destinos, select_distancias)
+    print(costo_total(select_distancias))
+    print(km_totales(select_distancias))
+    print(tramo_economico(select_destinos, select_distancias))
+    mostrar_ordenados(destinos_ordenados(destinos, select_distancias))
 
-    
-
-# funcion de busqueda secuencial 
-
-
+if __name__ == "__main__":
+    main()
