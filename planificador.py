@@ -3,7 +3,7 @@ import random
 costoXkm = 500
 
 def menu_destinos():
-    nombres_ciudades = ["Santiago", "Lima", "Sao Paulo", "Bogota", "Asunción"]
+    nombres_ciudades = ["Santiago, Chile", "Lima, Perú", "Sao Paulo, Brasil", "Bogota, Colombia", "Asunción, Paraguay"]
     destinos = []
     for nombre in nombres_ciudades:
         kilometraje = random.randint(1000, 10000)
@@ -14,7 +14,7 @@ def destinos_disponibles(destinos):
     print("Destinos disponibles origen Buenos Aires: ")
     for i in range(len(destinos)):
         nombre, kilometraje = destinos[i]
-        print(f"{i + 1}, Ciudad: {nombre}, kilometraje: {kilometraje}km")
+        print(f"{i + 1} - Ciudad: {nombre}, kilometraje: {kilometraje}km")
 
 def mostrar_destinos(destinos, distancias):
     print("Destinos que usted ha visitado: ")
