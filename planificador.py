@@ -62,17 +62,30 @@ def seleccion_destinos(destinos):
     return select_destinos, select_distancias
 
 def costo_total(distancias):
-    total = sum(distancia * costoXkm for distancia in distancias)
+    total = 0 
+    for distancia in distancias:
+        total += distancia * costoXkm
     return f"Su viaje se estima un total de ${total}"
 
+# kilometraje total
 def km_totales(distancias):
-    total = sum(distancias)
+    total = 0 
+    for distancia in distancias:
+        total += distancia
     return f"Su recorrido tuvo un total de {total}km"
 
+# cual es el tramo más económico
+# max tramo indica el primer destino 
+# itera desde el segundo elemento hasta el ult 
 def tramo_economico(destinos, distancias):
-    min_tramo = min(distancias) * costoXkm
-    min_in = distancias.index(min(distancias))
-    return f"Destino más económico: {destinos[min_in]}, Distancia: {distancias[min_in]}km, Costo: ${min_tramo}"
+    min_costo = distancias[0] * costoXkm 
+    min_in = 0 
+    for i in range(1, len(distancias)): 
+        costoTramo = distancias[i] * costoXkm
+        if costoTramo < min_costo:
+            min_costo = costoTramo
+            min_in = i 
+    return f"Destino más más economico: {destinos[min_in]}, Distancia que le corresponde: {distancias[min_in]}km, Costo: ${min_costo}"
 
 # destinos ordenados por su valor 
 def destinos_ordenados(destinos, distancias):
